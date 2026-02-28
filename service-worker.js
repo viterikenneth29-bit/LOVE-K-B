@@ -1,7 +1,19 @@
-const CACHE_NAME = "kenneth-briggette-v3";
+const CACHE_NAME = "kenneth-briggette-v4";
+
+const urlsToCache = [
+  "/",
+  "index.html",
+  "style.css",
+  "fondo.jpg",
+  "manifest.json"
+];
 
 self.addEventListener("install", event => {
   self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(urlsToCache))
+  );
 });
 
 self.addEventListener("activate", event => {
@@ -20,5 +32,10 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-  event.respondWith(fetch(event.request));
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        return response || fetch(event.request);
+      })
+  );
 });
