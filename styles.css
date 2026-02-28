@@ -126,6 +126,21 @@ small {
 .frase:active {
   transform: scale(0.97);
 }
+.btn-musica {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: #ff4d6d;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-musica:hover {
+  transform: scale(1.05);
+}
 
 
 
