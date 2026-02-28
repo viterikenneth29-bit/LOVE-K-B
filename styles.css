@@ -50,8 +50,8 @@ body::before {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 420px; /* un poco más grande que tu container */
-  height: 420px;
+  width: 700px; /* un poco más grande que tu container */
+  height: 700px;
   transform: translate(-50%, -50%);
   background: url("fondo.jpg") center/cover no-repeat;
   opacity: 0.15; /* poquita transparencia */
