@@ -23,11 +23,11 @@
   <div class="imagen-centro"></div>
   <div class="container">
     <h1>Kenneth ❤️ Briggette</h1>
-    <div class="heart">❤️</div>
-    <div class="counter" id="contador"></div>
+    <div class="tiempo" id="contador"></div>
+    <div class="frase" id="frase"></div>
     <small>Desde el 29 de Octubre de 2016 💕</small>
   </div>
-  <div class="frase" id="frase"></div>
+  
   <script>
     const fechaInicio = new Date("2016-10-29T15:00:00");
 
@@ -44,14 +44,8 @@
       const meses = Math.floor((diasTotales % 365) / 30);
       const dias = (diasTotales % 365) % 30;
 
-      document.getElementById("contador").innerHTML = `
-        <span>${años} años</span>
-        <span>${meses} meses</span>
-        <span>${dias} días</span>
-        <span>${horas} horas</span>
-        <span>${minutos} minutos</span>
-        <span>${segundos} segundos</span>
-      `;
+      document.getElementById("contador").innerHTML =
+  `${años} años • ${meses} meses • ${dias} días • ${horas}h • ${minutos}m • ${segundos}s`;
     }
 
     setInterval(calcularTiempo, 1000);
@@ -100,12 +94,3 @@ document.getElementById("frase").addEventListener("click", nuevaFrase);
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
