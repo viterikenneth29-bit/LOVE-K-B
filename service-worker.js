@@ -1,5 +1,4 @@
-const CACHE_NAME = "kenneth-briggette-v1";
-
+cconst CACHE_NAME = "kenneth-briggette-v2";
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
