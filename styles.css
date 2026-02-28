@@ -46,17 +46,14 @@ body::before {
   text-align: center;
   animation: fadeIn 1.2s ease;
 }
-.imagen-centro {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 500px; /* un poco más grande que tu container */
-  height: 500px;
-  transform: translate(-50%, -50%);
+.container::before {
+  content: "";
+  position: absolute;
+  inset: -30px; /* hace que sea un poco más grande que el container */
   background: url("fondo.jpg") center/cover no-repeat;
-  opacity: 0.15; /* poquita transparencia */
-  z-index: 0;
-  pointer-events: none;
+  border-radius: 32px;
+  z-index: -1;
+  opacity: 0.8;
 }
 
 @keyframes fadeIn {
@@ -122,4 +119,5 @@ small {
 .frase:active {
   transform: scale(0.97);
 }
+
 
