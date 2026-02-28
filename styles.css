@@ -39,7 +39,7 @@ body::before {
 }
 
 .container {
-  animation: fadeZoom 1.2s ease forwards;
+  animation: fadeZoom 2s ease forwards;
   position: relative;
   z-index: 1;
   width: 90%;
@@ -57,7 +57,7 @@ body::before {
   content: "";
   position: absolute;
   inset: -30px; /* hace que sea un poco más grande que el container */
-  background: url("fondo.jpg") center/cover no-repeat;
+  background: url("fondo.png") center/cover no-repeat;
   border-radius: 32px;
   z-index: -1;
   opacity: 0.2;
@@ -141,6 +141,7 @@ small {
 .btn-musica:hover {
   transform: scale(1.05);
 }
+
 
 
 
