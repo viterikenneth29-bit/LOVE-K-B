@@ -46,14 +46,14 @@ body::before {
   text-align: center;
   animation: fadeIn 1.2s ease;
 }
-.container::before {
+.container::after {
   content: "";
   position: absolute;
   inset: -30px; /* hace que sea un poco más grande que el container */
   background: url("fondo.jpg") center/cover no-repeat;
   border-radius: 32px;
   z-index: -1;
-  opacity: 0.8;
+  opacity: 0.2;
 }
 
 @keyframes fadeIn {
@@ -119,5 +119,6 @@ small {
 .frase:active {
   transform: scale(0.97);
 }
+
 
 
