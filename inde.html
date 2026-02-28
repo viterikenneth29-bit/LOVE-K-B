@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kenneth ❤️ Briggette</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ff4d6d">
+
+  <!-- iPhone -->
+  <link rel="apple-touch-icon" href="icono.jpg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Kenneth ❤️ Briggette</h1>
+    <div class="heart">❤️</div>
+    <div class="counter" id="contador"></div>
+    <small>Desde el 29 de Octubre de 2017 💕</small>
+  </div>
+
+  <script>
+    const fechaInicio = new Date("2017-10-29");
+
+    function calcularTiempo() {
+      const ahora = new Date();
+      const diff = ahora - fechaInicio;
+
+      const segundos = Math.floor(diff / 1000) % 60;
+      const minutos = Math.floor(diff / (1000 * 60)) % 60;
+      const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+      const diasTotales = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      const años = Math.floor(diasTotales / 365);
+      const meses = Math.floor((diasTotales % 365) / 30);
+      const dias = (diasTotales % 365) % 30;
+
+      document.getElementById("contador").innerHTML = `
+        <span>${años} años</span>
+        <span>${meses} meses</span>
+        <span>${dias} días</span>
+        <span>${horas} horas</span>
+        <span>${minutos} minutos</span>
+        <span>${segundos} segundos</span>
+      `;
+    }
+
+    setInterval(calcularTiempo, 1000);
+    calcularTiempo();
+
+    // Registrar Service Worker (PWA)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+
+</body>
+</html>
