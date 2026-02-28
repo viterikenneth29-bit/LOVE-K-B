@@ -26,6 +26,7 @@
     <div class="heart">❤️</div>
     <div class="counter" id="contador"></div>
     <small>Desde el 29 de Octubre de 2016 💕</small>
+    <div class="frase" id="frase"></div>
   </div>
 
   <script>
@@ -65,10 +66,42 @@
         .catch(err => console.log("Error al registrar SW", err));
     });
   }
+
+    const frases = [
+  "Eres mi lugar favorito en el mundo 💕",
+  "Te elegiría una y mil veces más ❤️",
+  "Contigo empezó mi mejor etapa ✨",
+  "Desde aquel día a las 3PM cambió todo 😌",
+  "Eres mi casualidad más bonita 💖",
+  "Lo mejor de mi vida empezó contigo 💌",
+  "Si volviera a nacer, te volvería a elegir 🥰",
+  "Nuestro tiempo juntos es mi tesoro 🕰️",
+  "Tú y yo contra el mundo 🌎❤️",
+  "Cada segundo contigo vale oro ✨"
+];
+
+function nuevaFrase() {
+  const fraseElemento = document.getElementById("frase");
+  const random = Math.floor(Math.random() * frases.length);
+  
+  fraseElemento.style.opacity = 0;
+
+  setTimeout(() => {
+    fraseElemento.textContent = frases[random];
+    fraseElemento.style.opacity = 1;
+  }, 300);
+}
+
+// Mostrar una al cargar
+nuevaFrase();
+
+// Cambiar cada vez que la toque
+document.getElementById("frase").addEventListener("click", nuevaFrase);
   </script>
 
 </body>
 </html>
+
 
 
 
