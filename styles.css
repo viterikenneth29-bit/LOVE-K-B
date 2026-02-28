@@ -50,8 +50,8 @@ body::before {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 700px; /* un poco más grande que tu container */
-  height: 700px;
+  width: 500px; /* un poco más grande que tu container */
+  height: 500px;
   transform: translate(-50%, -50%);
   background: url("fondo.jpg") center/cover no-repeat;
   opacity: 0.15; /* poquita transparencia */
@@ -122,3 +122,4 @@ small {
 .frase:active {
   transform: scale(0.97);
 }
+
