@@ -34,21 +34,28 @@
     const fechaInicio = new Date("2016-10-29T15:00:00");
 
     function calcularTiempo() {
-      const ahora = new Date();
-      const diff = ahora - fechaInicio;
+  const ahora = new Date();
+  let años = ahora.getFullYear() - fechaInicio.getFullYear();
+  let meses = ahora.getMonth() - fechaInicio.getMonth();
+  let dias = ahora.getDate() - fechaInicio.getDate();
 
-      const segundos = Math.floor(diff / 1000) % 60;
-      const minutos = Math.floor(diff / (1000 * 60)) % 60;
-      const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
-      const diasTotales = Math.floor(diff / (1000 * 60 * 60 * 24));
+  if (dias < 0) {
+    meses--;
+    dias += 30;
+  }
 
-      const años = Math.floor(diasTotales / 365);
-      const meses = Math.floor((diasTotales % 365) / 30);
-      const dias = (diasTotales % 365) % 30;
+  if (meses < 0) {
+    años--;
+    meses += 12;
+  }
 
-      document.getElementById("contador").innerHTML =
-  `${años} años • ${meses} meses • ${dias} días • ${horas}h • ${minutos}m • ${segundos}s tiempo juntos`;
-    }
+  const diff = ahora - fechaInicio;
+  const segundos = Math.floor(diff / 1000) % 60;
+  const minutos = Math.floor(diff / (1000 * 60)) % 60;
+  const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+
+  document.getElementById("contador").innerHTML =
+    `${años} años • ${meses} meses • ${dias} días • ${horas}h • ${minutos}m • ${segundos}s juntos 💖`;
 
     setInterval(calcularTiempo, 1000);
     calcularTiempo();
@@ -105,6 +112,7 @@ document.getElementById("frase").addEventListener("click", nuevaFrase);
 
 </body>
 </html>
+
 
 
 
