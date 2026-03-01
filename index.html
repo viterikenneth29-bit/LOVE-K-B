@@ -31,102 +31,96 @@
   </div>
   
   <script>
-    const fechaInicio = new Date("2016-10-29T15:00:00");
+  const fechaInicio = new Date("2016-10-29T15:00:00");
 
-    function calcularTiempo() {
-  const ahora = new Date();
-  let años = ahora.getFullYear() - fechaInicio.getFullYear();
-  let meses = ahora.getMonth() - fechaInicio.getMonth();
-  let dias = ahora.getDate() - fechaInicio.getDate();
+  function calcularTiempo() {
+    const ahora = new Date();
+    let años = ahora.getFullYear() - fechaInicio.getFullYear();
+    let meses = ahora.getMonth() - fechaInicio.getMonth();
+    let dias = ahora.getDate() - fechaInicio.getDate();
 
-  if (dias < 0) {
-    meses--;
-    dias += 30;
+    if (dias < 0) {
+      meses--;
+      dias += 30;
+    }
+
+    if (meses < 0) {
+      años--;
+      meses += 12;
+    }
+
+    const diff = ahora - fechaInicio;
+    const segundos = Math.floor(diff / 1000) % 60;
+    const minutos = Math.floor(diff / (1000 * 60)) % 60;
+    const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+
+    document.getElementById("contador").innerHTML =
+      `${años} años • ${meses} meses • ${dias} días • ${horas}h • ${minutos}m • ${segundos}s juntos 💖`;
   }
 
-  if (meses < 0) {
-    años--;
-    meses += 12;
-  }
+  // SOLO UN INTERVAL
+  setInterval(calcularTiempo, 1000);
+  calcularTiempo();
 
-  const diff = ahora - fechaInicio;
-  const segundos = Math.floor(diff / 1000) % 60;
-  const minutos = Math.floor(diff / (1000 * 60)) % 60;
-  const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
-
-  document.getElementById("contador").innerHTML =
-    `${años} años • ${meses} meses • ${dias} días • ${horas}h • ${minutos}m • ${segundos}s juntos 💖`;
-
-    setInterval(calcularTiempo, 1000);
-    calcularTiempo();
-
-    // Registrar Service Worker (PWA)
-    if ('serviceWorker' in navigator) {
+  // Service Worker
+  if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log("Service Worker registrado"))
+        .then(() => console.log("Service Worker registrado"))
         .catch(err => console.log("Error al registrar SW", err));
     });
   }
 
-    const frases = [
-  "¡Feliz cumpleaños, amor!, haces que todo en mi vida se sienta perfecto. Prometo amarte siempre... Always. 💕",
-  "Feliz cumpleaños amor. Eres el ingrediente secreto que le faltaba a mi receta para ser feliz. ¡Hoy nos toca cocinar algo rico, pero el postre lo elijes tú!",
-  "Amo que seamos el equipo perfecto en la cocina (aunque tú seas la chef y yo solo el que lava los platos). ¡Que este año esté lleno de buenos sabores y mucho amor! ✨",
-  "Sé cuánto te estás esforzando en la universidad y estoy tan orgulloso de ti, ¡Feliz cumpleaños! 😌",
-  "Feliz cumpleaños a la chica que me hechizó sin usar varita. Eres mi hogar, mi aventura y mi vida. ¡Te amo muchísimo! 💖",
-  "Lo mejor de mi vida empezó contigo 💌",
-  "Si volviera a nacer, te volvería a elegir 🥰",
-  "Nuestro tiempo juntos es mi tesoro 🕰️",
-  "Tú y yo contra el mundo 🌎❤️",
-  "Cada segundo contigo vale oro ✨"
-];
+  const frases = [
+    "¡Feliz cumpleaños, amor!, haces que todo en mi vida se sienta perfecto. Prometo amarte siempre... Always. 💕",
+    "Feliz cumpleaños amor. Eres el ingrediente secreto que le faltaba a mi receta para ser feliz. ¡Hoy nos toca cocinar algo rico, pero el postre lo eliges tú!",
+    "Amo que seamos el equipo perfecto en la cocina (aunque tú seas la chef y yo solo el que lava los platos). ¡Que este año esté lleno de buenos sabores y mucho amor! ✨",
+    "Sé cuánto te estás esforzando en la universidad y estoy tan orgulloso de ti, ¡Feliz cumpleaños! 😌",
+    "Feliz cumpleaños a la chica que me hechizó sin usar varita. Eres mi hogar, mi aventura y mi vida. ¡Te amo muchísimo! 💖",
+    "Lo mejor de mi vida empezó contigo 💌",
+    "Si volviera a nacer, te volvería a elegir 🥰",
+    "Nuestro tiempo juntos es mi tesoro 🕰️",
+    "Tú y yo contra el mundo 🌎❤️",
+    "Cada segundo contigo vale oro ✨"
+  ];
 
-function nuevaFrase() {
-  const fraseElemento = document.getElementById("frase");
-  const random = Math.floor(Math.random() * frases.length);
-  
-  fraseElemento.style.opacity = 0;
+  function nuevaFrase() {
+    const fraseElemento = document.getElementById("frase");
+    const random = Math.floor(Math.random() * frases.length);
 
-  setTimeout(() => {
-    fraseElemento.textContent = frases[random];
-    fraseElemento.style.opacity = 1;
-  }, 300);
-}
+    fraseElemento.style.opacity = 0;
 
-nuevaFrase();
-setInterval(nuevaFrase, 5000);
-
-document.getElementById("frase").addEventListener("click", nuevaFrase);
-
-// Cambiar cada vez que la toque
-document.getElementById("frase").addEventListener("click", nuevaFrase);
-    function toggleMusica() {
-  const audio = document.getElementById("musica");
-  
-  if (audio.paused) {
-    audio.play();
-  } else {
-    audio.pause();
+    setTimeout(() => {
+      fraseElemento.textContent = frases[random];
+      fraseElemento.style.opacity = 1;
+    }, 300);
   }
-}
-      function crearCorazon() {
-  const corazon = document.createElement("div");
-  corazon.innerHTML = "💖";
-  corazon.style.position = "fixed";
-  corazon.style.left = Math.random() * 100 + "vw";
-  corazon.style.bottom = "-20px";
-  corazon.style.fontSize = "20px";
-  corazon.style.animation = "flotar 5s linear forwards";
-  document.body.appendChild(corazon);
 
-  setTimeout(() => {
-    corazon.remove();
-  }, 5000);
-}
+  nuevaFrase();
+  setInterval(nuevaFrase, 5000);
 
-setInterval(crearCorazon, 800);
-  </script>
+  document.getElementById("frase").addEventListener("click", nuevaFrase);
+
+  function toggleMusica() {
+    const audio = document.getElementById("musica");
+    audio.paused ? audio.play() : audio.pause();
+  }
+
+  function crearCorazon() {
+    const corazon = document.createElement("div");
+    corazon.innerHTML = "💖";
+    corazon.style.position = "fixed";
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.bottom = "-20px";
+    corazon.style.fontSize = "20px";
+    corazon.style.animation = "flotar 5s linear forwards";
+    document.body.appendChild(corazon);
+
+    setTimeout(() => corazon.remove(), 5000);
+  }
+
+  setInterval(crearCorazon, 800);
+</script>
 
   <style>
 @keyframes flotar {
@@ -138,6 +132,7 @@ setInterval(crearCorazon, 800);
 </style>
 </body>
 </html>
+
 
 
 
