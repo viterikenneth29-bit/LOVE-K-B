@@ -94,8 +94,10 @@ function nuevaFrase() {
   }, 300);
 }
 
-// Mostrar una al cargar
 nuevaFrase();
+setInterval(nuevaFrase, 5000);
+
+document.getElementById("frase").addEventListener("click", nuevaFrase);
 
 // Cambiar cada vez que la toque
 document.getElementById("frase").addEventListener("click", nuevaFrase);
@@ -136,6 +138,7 @@ setInterval(crearCorazon, 800);
 </style>
 </body>
 </html>
+
 
 
 
