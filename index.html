@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kenneth ❤️ Briggette</title>
-
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ff4d6d">
 
   <!-- iPhone -->
-  <link rel="apple-touch-icon" href="icono.png">
+  <link rel="apple-touch-icon" href="icono.jpg">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -19,127 +18,166 @@
 </head>
 
 <body>
+  <div class="imagen-centro"></div>
   <div class="container">
     <h1>Kenneth ❤️ Briggette</h1>
     <div class="tiempo" id="contador"></div>
     <div class="frase" id="frase"></div>
-    <button class="btn-musica" onclick="toggleMusica()">
-    🎶 Nuestra canción
-    </button>
-    <audio id="musica" src="cancion.mp3"></audio>
-    <small>Desde el 29 de Octubre de 2016 💕</small>
+    <small>Desde el 29 de Octubre de 2018 💕</small>
   </div>
-  
+    <!-- BOTON SECRETO -->
+<button id="btnSecreto" class="btn-lock">🔒</button>
+
+<!-- MODAL -->
+<div id="modalSecreto" class="modal">
+  <div class="modal-content">
+    <h2>Ingresa nuestro código 💕</h2>
+    <input type="password" id="codigoInput" maxlength="6" placeholder="******" inputmode="numeric">
+    <div class="botones">
+      <button onclick="verificarCodigo()">Desbloquear</button>
+      <button onclick="cerrarModal()">Cancelar</button>
+    </div>
+    <p id="errorMensaje"></p>
+  </div>
+</div>
+
   <script>
-  const fechaInicio = new Date("2016-10-29T15:00:00");
+    const fechaInicio = new Date("2016-10-29T15:00:00");
 
-  function calcularTiempo() {
-    const ahora = new Date();
-    let años = ahora.getFullYear() - fechaInicio.getFullYear();
-    let meses = ahora.getMonth() - fechaInicio.getMonth();
-    let dias = ahora.getDate() - fechaInicio.getDate();
+    function calcularTiempo() {
+      const ahora = new Date();
+      const diff = ahora - fechaInicio;
 
-    if (dias < 0) {
-      meses--;
-      dias += 30;
+      const segundos = Math.floor(diff / 1000) % 60;
+      const minutos = Math.floor(diff / (1000 * 60)) % 60;
+      const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+      const diasTotales = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      const años = Math.floor(diasTotales / 365);
+      const meses = Math.floor((diasTotales % 365) / 30);
+      const dias = (diasTotales % 365) % 30;
+
+      document.getElementById("contador").innerHTML =
+  `${años} años • ${meses} meses • ${dias} días • ${horas}h • ${minutos}m • ${segundos}s`;
     }
 
-    if (meses < 0) {
-      años--;
-      meses += 12;
-    }
+    setInterval(calcularTiempo, 1000);
+    calcularTiempo();
 
-    const diff = ahora - fechaInicio;
-    const segundos = Math.floor(diff / 1000) % 60;
-    const minutos = Math.floor(diff / (1000 * 60)) % 60;
-    const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
-
-    document.getElementById("contador").innerHTML =
-      `${años} años • ${meses} meses • ${dias} días • ${horas}h • ${minutos}m • ${segundos}s juntos 💖`;
-  }
-
-  // SOLO UN INTERVAL
-  setInterval(calcularTiempo, 1000);
-  calcularTiempo();
-
-  // Service Worker
-  if ('serviceWorker' in navigator) {
+    // Registrar Service Worker (PWA)
+    if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log("Service Worker registrado"))
+        .then(reg => console.log("Service Worker registrado"))
         .catch(err => console.log("Error al registrar SW", err));
     });
   }
 
-  const frases = [
-    "¡Feliz cumpleaños, amor!, haces que todo en mi vida se sienta perfecto. Prometo amarte siempre... Always. 💕",
-    "Feliz cumpleaños amor. Eres el ingrediente secreto que le faltaba a mi receta para ser feliz. ¡Hoy nos toca cocinar algo rico, pero el postre lo eliges tú!",
-    "Amo que seamos el equipo perfecto en la cocina (aunque tú seas la chef y yo solo el que lava los platos). ¡Que este año esté lleno de buenos sabores y mucho amor! ✨",
-    "Sé cuánto te estás esforzando en la universidad y estoy tan orgulloso de ti, ¡Feliz cumpleaños! 😌",
-    "Feliz cumpleaños a la chica que me hechizó sin usar varita. Eres mi hogar, mi aventura y mi vida. ¡Te amo muchísimo! 💖",
-    "Lo mejor de mi vida empezó contigo 💌",
-    "Si volviera a nacer, te volvería a elegir 🥰",
-    "Nuestro tiempo juntos es mi tesoro 🕰️",
-    "Tú y yo contra el mundo 🌎❤️",
-    "Cada segundo contigo vale oro ✨"
-  ];
+    const frases = [
+  "¡Feliz cumpleaños, amor!, haces que todo en mi vida se sienta perfecto. Prometo amarte siempre... Always. 💕",
+  "Feliz cumpleaños amor. Eres el ingrediente secreto que le faltaba a mi receta para ser feliz. ¡Hoy nos toca cocinar algo rico, pero el postre lo elijes tú!",
+  "Amo que seamos el equipo perfecto en la cocina (aunque tú seas la chef y yo solo el que lava los platos). ¡Que este año esté lleno de buenos sabores y mucho amor! ✨",
+  "Sé cuánto te estás esforzando en la universidad y estoy tan orgulloso de ti, ¡Feliz cumpleaños! 😌",
+  "Feliz cumpleaños a la chica que me hechizó sin usar varita. Eres mi hogar, mi aventura y mi vida. ¡Te amo muchísimo! 💖",
+  "Lo mejor de mi vida empezó contigo 💌",
+  "Si volviera a nacer, te volvería a elegir 🥰",
+  "Nuestro tiempo juntos es mi tesoro 🕰️",
+  "Tú y yo contra el mundo 🌎❤️",
+  "Cada segundo contigo vale oro ✨"
+];
 
-  function nuevaFrase() {
-    const fraseElemento = document.getElementById("frase");
-    const random = Math.floor(Math.random() * frases.length);
+function nuevaFrase() {
+  const fraseElemento = document.getElementById("frase");
+  const random = Math.floor(Math.random() * frases.length);
+  
+  fraseElemento.style.opacity = 0;
 
-    fraseElemento.style.opacity = 0;
+  setTimeout(() => {
+    fraseElemento.textContent = frases[random];
+    fraseElemento.style.opacity = 1;
+  }, 300);
+}
 
+// Mostrar una al cargar
+nuevaFrase();
+
+// Cambiar cada vez que la toque
+document.getElementById("frase").addEventListener("click", nuevaFrase);
+
+const codigoCorrecto = "030602"; // ← CAMBIA ESTO
+
+document.getElementById("btnSecreto").addEventListener("click", () => {
+  document.getElementById("modalSecreto").style.display = "flex";
+});
+
+function cerrarModal() {
+  document.getElementById("modalSecreto").style.display = "none";
+  document.getElementById("codigoInput").value = "";
+  document.getElementById("errorMensaje").textContent = "";
+}
+const codigoVideo1 = "030602";
+const codigoVideo2 = "291016";
+
+function verificarCodigo() {
+  const input = document.getElementById("codigoInput").value;
+  const error = document.getElementById("errorMensaje");
+
+  if (input === codigoVideo1) {
+    cerrarModal();
+    mostrarVideoSecreto("brunomars.mp4");
+  } 
+  else if (input === codigoVideo2) {
+    cerrarModal();
+    mostrarVideoSecreto("chalame.mp4"); // CAMBIA el nombre aquí
+  } 
+  else {
+    error.textContent = "Código incorrecto 💔";
+    document.querySelector(".modal-content").style.animation = "shake 0.3s";
     setTimeout(() => {
-      fraseElemento.textContent = frases[random];
-      fraseElemento.style.opacity = 1;
+      document.querySelector(".modal-content").style.animation = "";
     }, 300);
   }
-
-  nuevaFrase();
-  setInterval(nuevaFrase, 5000);
-
-  document.getElementById("frase").addEventListener("click", nuevaFrase);
-
-  function toggleMusica() {
-    const audio = document.getElementById("musica");
-    audio.paused ? audio.play() : audio.pause();
-  }
-
-  function crearCorazon() {
-    const corazon = document.createElement("div");
-    corazon.innerHTML = "💖";
-    corazon.style.position = "fixed";
-    corazon.style.left = Math.random() * 100 + "vw";
-    corazon.style.bottom = "-20px";
-    corazon.style.fontSize = "20px";
-    corazon.style.animation = "flotar 5s linear forwards";
-    document.body.appendChild(corazon);
-
-    setTimeout(() => corazon.remove(), 5000);
-  }
-
-  setInterval(crearCorazon, 800);
-</script>
-
-  <style>
-@keyframes flotar {
-  to {
-    transform: translateY(-110vh);
-    opacity: 0;
-  }
 }
-</style>
+
+  function mostrarVideoSecreto(nombreVideo) {
+  const secreto = document.createElement("div");
+
+  secreto.innerHTML = `
+    <div style="
+      position: fixed;
+      inset: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+    ">
+      
+      <video width="90%" controls autoplay>
+        <source src="${nombreVideo}" type="video/mp4">
+        Tu navegador no soporta video.
+      </video>
+
+      <button onclick="this.parentElement.remove()" 
+        style="
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          background: white;
+        ">
+        ✖
+      </button>
+
+    </div>
+  `;
+
+  document.body.appendChild(secreto);
+}
+  </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

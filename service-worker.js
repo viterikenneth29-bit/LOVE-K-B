@@ -5,7 +5,10 @@ const urlsToCache = [
   "index.html",
   "style.css",
   "fondo.jpg",
+  "brunomars.mp4",
+  "chalame.mp4",
   "manifest.json"
+
 ];
 
 self.addEventListener("install", event => {
@@ -33,9 +36,13 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then(response => {
-        return response || fetch(event.request);
+        return caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, response.clone());
+          return response;
+        });
       })
+      .catch(() => caches.match(event.request))
   );
 });
