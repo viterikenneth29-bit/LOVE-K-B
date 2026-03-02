@@ -63,9 +63,12 @@ body::before {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.7);
+
   justify-content: center;
   align-items: center;
+
   z-index: 9999;
+  padding: 20px; /* 👈 esto lo mejora mucho en móvil */
 }
 
 .modal-content {
@@ -215,6 +218,7 @@ small {
 .btn-musica:hover {
   transform: scale(1.05);
 }
+
 
 
 
