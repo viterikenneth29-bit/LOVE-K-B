@@ -61,14 +61,15 @@ body::before {
 .modal {
   display: none;
   animation: fadeZoom 2s ease forwards;
-  position: absolute;
+  position: fixed;        /* 👈 importante */
+  inset: 0;               
   z-index: 2;
   width: 90%;
   max-width: 380px;
   padding: 30px 25px;
   border-radius: 28px;
   background: rgba(0,0,0,0.7);
-  text-align: center;
+  text-align: center;             
 }
 
 .modal-content {
@@ -222,6 +223,7 @@ small {
 .btn-musica:hover {
   transform: scale(1.05);
 }
+
 
 
 
