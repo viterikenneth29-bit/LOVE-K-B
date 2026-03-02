@@ -63,22 +63,21 @@ body::before {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.7);
-
-  justify-content: center;
-  align-items: center;
-
   z-index: 9999;
-  padding: 20px; /* 👈 esto lo mejora mucho en móvil */
 }
 
 .modal-content {
-    background: #ff4d6d;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  background: #ff4d6d;
   padding: 30px;
   border-radius: 20px;
   text-align: center;
-
-  width: 90%;          /* Se adapta al celular */
-  max-width: 350px;    /* Límite en PC */
+  width: 90%;
+  max-width: 320px;
 
   animation: aparecer 0.3s ease;
 }
@@ -218,6 +217,7 @@ small {
 .btn-musica:hover {
   transform: scale(1.05);
 }
+
 
 
 
