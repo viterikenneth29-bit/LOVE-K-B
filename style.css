@@ -88,7 +88,7 @@ body::before {
   font-size: 24px;
   text-align: center;
   letter-spacing: 8px;
-  background: ##ffffff;
+  background: #ffffff;
   margin: 15px 0;
   padding: 10px;
   width: 100%;
@@ -220,6 +220,7 @@ small {
 .btn-musica:hover {
   transform: scale(1.05);
 }
+
 
 
 
