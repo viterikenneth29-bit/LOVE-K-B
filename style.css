@@ -69,11 +69,14 @@ body::before {
 }
 
 .modal-content {
-  background: #ff4d6d;
+    background: #ff4d6d;
   padding: 30px;
   border-radius: 20px;
   text-align: center;
-  width: 300px;
+
+  width: 90%;          /* Se adapta al celular */
+  max-width: 350px;    /* Límite en PC */
+
   animation: aparecer 0.3s ease;
 }
 
@@ -212,6 +215,7 @@ small {
 .btn-musica:hover {
   transform: scale(1.05);
 }
+
 
 
 
