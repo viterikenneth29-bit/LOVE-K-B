@@ -67,7 +67,7 @@ body::before {
   max-width: 380px;
   padding: 30px 25px;
   border-radius: 28px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(0,0,0,0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 20px 40px rgba(0,0,0,0.2);
@@ -225,6 +225,7 @@ small {
 .btn-musica:hover {
   transform: scale(1.05);
 }
+
 
 
 
