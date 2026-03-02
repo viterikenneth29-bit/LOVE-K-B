@@ -82,14 +82,13 @@ body::before {
   text-align: center;
   width: 90%;
   max-width: 320px;
-
-  animation: aparecer 0.3s ease;
 }
 
 .modal-content input {
   font-size: 24px;
   text-align: center;
   letter-spacing: 8px;
+  background: ##ffffff;
   margin: 15px 0;
   padding: 10px;
   width: 100%;
@@ -221,6 +220,7 @@ small {
 .btn-musica:hover {
   transform: scale(1.05);
 }
+
 
 
 
