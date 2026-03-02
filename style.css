@@ -69,7 +69,7 @@ body::before {
 }
 
 .modal-content {
-  background: white;
+  background: #ff4d6d;
   padding: 30px;
   border-radius: 20px;
   text-align: center;
